@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class GearService {
 
-  connectionString = "api/controller/get";
+  connectionString = "api/controller";
 
   constructor(private http: HttpClient) { }
 

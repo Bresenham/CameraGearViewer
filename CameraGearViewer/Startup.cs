@@ -1,3 +1,4 @@
+using CameraGearViewer.Classes;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -5,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 
 namespace CameraGearViewer
 {
@@ -27,6 +29,12 @@ namespace CameraGearViewer
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddDbContext<DatabaseContext>(options =>
+                    options.UseSqlite("Filename=database.db")
+                );
+
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
