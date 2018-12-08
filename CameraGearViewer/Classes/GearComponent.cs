@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,6 +13,12 @@ namespace CameraGearViewer.Classes
         public string Description { get; set; }
         public string Date { get; set; }
 
+        public GearComponent(int id, string name, string description, string date) : this(name, description, date)
+        {
+            Id = id;
+        }
+
+        [JsonConstructor]
         public GearComponent(string name, string description, string date)
         {
             Name = name;

@@ -33,7 +33,10 @@ namespace CameraGearViewer.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return new BadRequestObjectResult(
+                    ModelState.Values
+                        .SelectMany(e => e.Errors)
+                        .Select(e => e.ErrorMessage));
             }
 
             var gearComponent = await _context.GearComponents.FindAsync(id);
@@ -52,7 +55,10 @@ namespace CameraGearViewer.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return new BadRequestObjectResult(
+                    ModelState.Values
+                        .SelectMany(e => e.Errors)
+                        .Select(e => e.ErrorMessage));
             }
 
             if (id != gearComponent.Id)
@@ -87,7 +93,10 @@ namespace CameraGearViewer.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return new BadRequestObjectResult(
+                    ModelState.Values
+                        .SelectMany(e => e.Errors)
+                        .Select(e => e.ErrorMessage));
             }
 
             _context.GearComponents.Add(gearComponent);
@@ -102,7 +111,10 @@ namespace CameraGearViewer.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return new BadRequestObjectResult(
+                    ModelState.Values
+                        .SelectMany(e => e.Errors)
+                        .Select(e => e.ErrorMessage));
             }
 
             var gearComponent = await _context.GearComponents.FindAsync(id);
