@@ -22,7 +22,7 @@ namespace CameraGearViewer.Classes
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<GearComponent>().HasKey(m => m.Id);
+            builder.Entity<GearComponent>().HasKey(m => m.ForumLink);
             base.OnModelCreating(builder);
         }
     }

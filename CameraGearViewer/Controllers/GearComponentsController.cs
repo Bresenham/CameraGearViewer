@@ -29,14 +29,11 @@ namespace CameraGearViewer.Controllers
 
         // GET: api/GearComponents/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetGearComponent([FromRoute] long id)
+        public async Task<IActionResult> GetGearComponent([FromRoute] string id)
         {
             if (!ModelState.IsValid)
             {
-                return new BadRequestObjectResult(
-                    ModelState.Values
-                        .SelectMany(e => e.Errors)
-                        .Select(e => e.ErrorMessage));
+                return BadRequest(ModelState);
             }
 
             var gearComponent = await _context.GearComponents.FindAsync(id);
@@ -51,17 +48,14 @@ namespace CameraGearViewer.Controllers
 
         // PUT: api/GearComponents/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutGearComponent([FromRoute] long id, [FromBody] GearComponent gearComponent)
+        public async Task<IActionResult> PutGearComponent([FromRoute] string id, [FromBody] GearComponent gearComponent)
         {
             if (!ModelState.IsValid)
             {
-                return new BadRequestObjectResult(
-                    ModelState.Values
-                        .SelectMany(e => e.Errors)
-                        .Select(e => e.ErrorMessage));
+                return BadRequest(ModelState);
             }
 
-            if (id != gearComponent.Id)
+            if (id != gearComponent.ForumLink)
             {
                 return BadRequest();
             }
@@ -91,30 +85,24 @@ namespace CameraGearViewer.Controllers
         [HttpPost]
         public async Task<IActionResult> PostGearComponent([FromBody] GearComponent gearComponent)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || GearComponentExists(gearComponent.ForumLink))
             {
-                return new BadRequestObjectResult(
-                    ModelState.Values
-                        .SelectMany(e => e.Errors)
-                        .Select(e => e.ErrorMessage));
+                return BadRequest(ModelState);
             }
 
             _context.GearComponents.Add(gearComponent);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetGearComponent", new { id = gearComponent.Id }, gearComponent);
+            return CreatedAtAction("GetGearComponent", new { id = gearComponent.ForumLink }, gearComponent);
         }
 
         // DELETE: api/GearComponents/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteGearComponent([FromRoute] long id)
+        public async Task<IActionResult> DeleteGearComponent([FromRoute] string id)
         {
             if (!ModelState.IsValid)
             {
-                return new BadRequestObjectResult(
-                    ModelState.Values
-                        .SelectMany(e => e.Errors)
-                        .Select(e => e.ErrorMessage));
+                return BadRequest(ModelState);
             }
 
             var gearComponent = await _context.GearComponents.FindAsync(id);
@@ -129,9 +117,9 @@ namespace CameraGearViewer.Controllers
             return Ok(gearComponent);
         }
 
-        private bool GearComponentExists(long id)
+        private bool GearComponentExists(string id)
         {
-            return _context.GearComponents.Any(e => e.Id == id);
+            return _context.GearComponents.Any(e => e.ForumLink == id);
         }
     }
 }

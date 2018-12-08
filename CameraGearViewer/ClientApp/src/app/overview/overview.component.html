@@ -10,8 +10,10 @@
   <tbody>
     <tr *ngFor="let gear of gearPieces | async">
       <td>{{gear.name}}</td>
-      <td>{{gear.description}}</td>
+      <td>{{gear.price}}€</td>
+      <td><a href="{{gear.forumLink}}">Hier</a></td>
       <td>{{gear.date}}</td>
+      <td></td>
     </tr>
   </tbody>
 </table>

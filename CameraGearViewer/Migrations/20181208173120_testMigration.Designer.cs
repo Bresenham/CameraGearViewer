@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CameraGearViewer.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20181208111031_testMigration")]
+    [Migration("20181208173120_testMigration")]
     partial class testMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,16 +19,16 @@ namespace CameraGearViewer.Migrations
 
             modelBuilder.Entity("CameraGearViewer.Classes.GearComponent", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<string>("ForumLink")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Date");
 
-                    b.Property<string>("Description");
-
                     b.Property<string>("Name");
 
-                    b.HasKey("Id");
+                    b.Property<double>("Price");
+
+                    b.HasKey("ForumLink");
 
                     b.ToTable("GearComponents");
                 });

@@ -17,16 +17,16 @@ namespace CameraGearViewer.Migrations
 
             modelBuilder.Entity("CameraGearViewer.Classes.GearComponent", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<string>("ForumLink")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Date");
 
-                    b.Property<string>("Description");
-
                     b.Property<string>("Name");
 
-                    b.HasKey("Id");
+                    b.Property<double>("Price");
+
+                    b.HasKey("ForumLink");
 
                     b.ToTable("GearComponents");
                 });

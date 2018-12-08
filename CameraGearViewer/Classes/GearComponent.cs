@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,21 +9,18 @@ namespace CameraGearViewer.Classes
 {
     public class GearComponent
     {
-        public long Id { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
+        public double Price { get; set; }
+        [Key]
+        public string ForumLink { get; set; }
         public string Date { get; set; }
 
-        public GearComponent(int id, string name, string description, string date) : this(name, description, date)
-        {
-            Id = id;
-        }
-
         [JsonConstructor]
-        public GearComponent(string name, string description, string date)
+        public GearComponent(string name, double price, string forumLink, string date)
         {
             Name = name;
-            Description = description;
+            Price = price;
+            ForumLink = forumLink;
             Date = date;
         }
     }

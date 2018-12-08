@@ -7,12 +7,14 @@ import { Component, OnInit } from '@angular/core';
 export class GearComponent implements OnInit {
 
   name: string;
-  description: string;
+  price: number;
+  forumLink: string;
   date: string;
 
-  constructor(name: string, description: string, date: string) {
+  constructor(name : string, price : number, forumLink: string, date: string) {
     this.name = name;
-    this.description = description;
+    this.price = price;
+    this.forumLink = forumLink;
     this.date = date;
   }
 

@@ -20,11 +20,15 @@ export class OverviewComponent implements OnInit {
       icon: "/assets/imgs/name-32.png"
     },
     {
-      descriptor: "Description",
+      descriptor: "Price",
       icon: "/assets/imgs/description-32.png"
     },
     {
-      descriptor: "Date Added",
+      descriptor: "Link",
+      icon: "/assets/imgs/timer-32.png"
+    },
+    {
+      descriptor: "Datum",
       icon: "/assets/imgs/timer-32.png"
     }
   ];

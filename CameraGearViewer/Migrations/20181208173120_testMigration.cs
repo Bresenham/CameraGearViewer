@@ -10,15 +10,14 @@ namespace CameraGearViewer.Migrations
                 name: "GearComponents",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
+                    Price = table.Column<double>(nullable: false),
+                    ForumLink = table.Column<string>(nullable: false),
                     Date = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GearComponents", x => x.Id);
+                    table.PrimaryKey("PK_GearComponents", x => x.ForumLink);
                 });
         }
 
