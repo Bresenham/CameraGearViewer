@@ -8,12 +8,12 @@ export class GearComponent implements OnInit {
 
   name: string;
   description: string;
-  dateAdded: string;
+  date: string;
 
-  constructor(name: string, description: string, dateAdded: string) {
+  constructor(name: string, description: string, date: string) {
     this.name = name;
     this.description = description;
-    this.dateAdded = dateAdded;
+    this.date = date;
   }
 
   ngOnInit() {

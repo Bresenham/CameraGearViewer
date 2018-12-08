@@ -1,16 +1,17 @@
 <table class="table table-dark">
   <thead>
     <tr>
-      <th *ngFor="let header of headerElements;">
+      <th *ngFor="let header of headerElements">
         <img src={{header.icon}} width="32" height="32"/>{{header.descriptor}}
       </th>
+      <th cursor="hand"><img src="../../assets/imgs/refresh-48.png" width="32" height="32" (click)="loadGearComponents()"/></th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let gear of gearPieces;">
+    <tr *ngFor="let gear of gearPieces | async">
       <td>{{gear.name}}</td>
       <td>{{gear.description}}</td>
-      <td>{{gear.dateAdded}}</td>
+      <td>{{gear.date}}</td>
     </tr>
   </tbody>
 </table>

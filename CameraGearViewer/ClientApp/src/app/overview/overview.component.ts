@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { GearComponent } from '../gear/gear.component';
 import { formatDate } from '@angular/common';
+import { GearService } from '../services/gear.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'overview',
@@ -10,11 +12,7 @@ export class OverviewComponent implements OnInit {
 
   createdOn = formatDate(Date.now(), "dd.MM.yyyy HH:mm", "en-US");
 
-  gearPieces = [
-    new GearComponent("Lens", "Objektiv", this.createdOn),
-    new GearComponent("Camera", "Kamera", this.createdOn),
-    new GearComponent("Aperture", "Blende", this.createdOn)
-  ];
+  gearPieces: Observable<GearComponent[]>;
 
   headerElements = [
     {
@@ -31,7 +29,11 @@ export class OverviewComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(private gearService: GearService) {}
+
+  loadGearComponents() {
+    this.gearPieces = this.gearService.getGearComponents();
+  }
 
   ngOnInit() {
 
