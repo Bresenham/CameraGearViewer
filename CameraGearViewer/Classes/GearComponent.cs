@@ -11,12 +11,13 @@ namespace CameraGearViewer.Classes
     {
         public string Name { get; set; }
         public double Price { get; set; }
+
         [Key]
         public string ForumLink { get; set; }
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
 
         [JsonConstructor]
-        public GearComponent(string name, double price, string forumLink, string date)
+        public GearComponent(string name, double price, string forumLink, DateTime date)
         {
             Name = name;
             Price = price;

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CameraGearViewer.Classes;
+using System.Reflection;
 
 namespace CameraGearViewer.Controllers
 {
@@ -25,6 +26,18 @@ namespace CameraGearViewer.Controllers
         public IEnumerable<GearComponent> GetGearComponents()
         {
             return _context.GearComponents;
+        }
+
+        // "/orderBy=price&direction=asc"
+        [HttpGet("sorted")]
+        public IEnumerable<GearComponent> GetGearComponentsSorted([FromQuery] string orderBy, [FromQuery] string direction)
+        {
+            PropertyInfo prop = typeof(GearComponent).GetProperty(orderBy);
+
+            if (direction.Equals("asc"))
+                return _context.GearComponents.OrderBy(x => prop.GetValue(x, null));
+            else
+                return _context.GearComponents.OrderByDescending(x => prop.GetValue(x, null));
         }
 
         // GET: api/GearComponents/5

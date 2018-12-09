@@ -1,10 +1,10 @@
 <table class="table table-dark">
   <thead>
     <tr>
-      <th *ngFor="let header of headerElements">
+      <th *ngFor="let header of headerElements" [ngStyle]="{'cursor': header.style}" (click)="orderBy(header.event)">
         <img src={{header.icon}} width="32" height="32"/>{{header.descriptor}}
       </th>
-      <th cursor="hand"><img src="../../assets/imgs/refresh-48.png" width="32" height="32" (click)="loadGearComponents()"/></th>
+      <th style="cursor: pointer;"><img src="../../assets/imgs/refresh-48.png" width="32" height="32" (click)="loadGearComponents()"/></th>
     </tr>
   </thead>
   <tbody>
@@ -12,7 +12,7 @@
       <td>{{gear.name}}</td>
       <td>{{gear.price}}€</td>
       <td><a href="{{gear.forumLink}}">Hier</a></td>
-      <td>{{gear.date}}</td>
+      <td>{{gear.date | date: "dd.MM.yyyy, HH:mm"}}</td>
       <td></td>
     </tr>
   </tbody>

@@ -9,9 +9,9 @@ export class GearComponent implements OnInit {
   name: string;
   price: number;
   forumLink: string;
-  date: string;
+  date: Date;
 
-  constructor(name : string, price : number, forumLink: string, date: string) {
+  constructor(name: string, price: number, forumLink: string, date: Date) {
     this.name = name;
     this.price = price;
     this.forumLink = forumLink;

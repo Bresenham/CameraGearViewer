@@ -17,19 +17,27 @@ export class OverviewComponent implements OnInit {
   headerElements = [
     {
       descriptor: "Name",
-      icon: "/assets/imgs/name-32.png"
+      icon: "/assets/imgs/name-32.png",
+      style: "default",
+      event: ""
     },
     {
       descriptor: "Price",
-      icon: "/assets/imgs/description-32.png"
+      icon: "/assets/imgs/description-32.png",
+      style: "pointer",
+      event: "Price"
     },
     {
       descriptor: "Link",
-      icon: "/assets/imgs/timer-32.png"
+      icon: "/assets/imgs/timer-32.png",
+      style: "default",
+      event: ""
     },
     {
       descriptor: "Datum",
-      icon: "/assets/imgs/timer-32.png"
+      icon: "/assets/imgs/timer-32.png",
+      style: "pointer",
+      event: "Date"
     }
   ];
 
@@ -37,6 +45,14 @@ export class OverviewComponent implements OnInit {
 
   loadGearComponents() {
     this.gearPieces = this.gearService.getGearComponents();
+  }
+
+  isSortedAsc = false;
+
+  orderBy(property : string) {
+    this.isSortedAsc = !this.isSortedAsc;
+    const direction = this.isSortedAsc ? "desc" : "asc";
+    this.gearPieces = this.gearService.getGearComponentsOrderBy(property, direction);
   }
 
   ngOnInit() {
