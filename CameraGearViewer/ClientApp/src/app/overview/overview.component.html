@@ -1,19 +1,21 @@
-<table class="table table-dark table-striped table-hover">
+<table class="table table-dark table-hover">
   <thead>
     <tr>
       <th *ngFor="let header of headerElements" [ngStyle]="{'cursor': header.style}" (click)="orderBy(header.event)">
         <img src={{header.icon}} width="32" height="32" />{{header.descriptor}}
       </th>
-      <th><input class="form-control" type="text" placeholder="Suchen..." (input)="onSearchInputChange($event.target.value)"></th>
+      <th><input class="form-control" type="text" placeholder="Suchen..." (input)="onSearchInputChange()" [(ngModel)]="searchFilterText"/></th>
       <th style="cursor: pointer;"><img src="../../assets/imgs/refresh-48.png" width="32" height="32" (click)="loadGearComponents()"/></th>
+      <th><div class="font-weight-light" id="lblLastUpdate">{{lastUpdate | date:'HH:mm'}}</div></th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let gear of gearPieces | async">
+    <tr *ngFor="let gear of filteredComponents" [ngClass]="{'green' : gear.isNew}">
       <td>{{gear.name}}</td>
       <td>{{gear.price}}€</td>
       <td><a href="{{gear.forumLink}}">Hier</a></td>
       <td>{{gear.date | date: "dd.MM.yyyy, HH:mm"}}</td>
+      <td></td>
       <td></td>
       <td></td>
     </tr>

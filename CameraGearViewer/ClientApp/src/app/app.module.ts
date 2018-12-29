@@ -10,6 +10,7 @@ import { GearComponent } from './gear/gear.component';
 import { HttpClientModule } from '@angular/common/http';
 
 import { KeyboardShortcutsModule } from 'ng-keyboard-shortcuts';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { KeyboardShortcutsModule } from 'ng-keyboard-shortcuts';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    KeyboardShortcutsModule
+    KeyboardShortcutsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -10,12 +10,14 @@ export class GearComponent implements OnInit {
   price: number;
   forumLink: string;
   date: Date;
+  isNew: boolean;
 
   constructor(name: string, price: number, forumLink: string, date: Date) {
     this.name = name;
     this.price = price;
     this.forumLink = forumLink;
     this.date = date;
+    this.isNew = false;
   }
 
   ngOnInit() {

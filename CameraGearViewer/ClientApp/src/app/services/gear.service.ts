@@ -15,12 +15,4 @@ export class GearService {
   getGearComponents(): Observable<GearComponent[]> {
     return this.http.get<GearComponent[]>(this.connectionString);
   }
-
-  getGearComponentsOrderBy(property : string, direction : string): Observable<GearComponent[]> {
-    return this.http.get<GearComponent[]>(this.connectionString + "/sorted?orderBy=" + property + "&direction=" + direction);
-  }
-
-  getGearComponentsFiltered(filter: string): Observable<GearComponent[]> {
-    return this.http.get<GearComponent[]>(this.connectionString + "/filtered?filterText=" + filter);
-  }
 }
