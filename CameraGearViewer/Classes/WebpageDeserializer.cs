@@ -24,7 +24,9 @@ namespace CameraGearViewer.Classes
             {"€(;)?(\\s|)([0-9])(\\.|)?([0-9]+)((,|\\.)[0-9]+)?(,-)?", str => str.Replace("€", "").Replace(";", "").Replace(",-", "").Trim()},
             {"€(\\s|)([0-9]+)(,[0-9]+)?", str => str.Replace("€", "").Trim()},
             {"([0-9]+(,|\\.))?[0-9]+(\\s|),-(\\s|)eur", str => str.Replace(",-", "").Replace("eur", "").Trim()},
-            {"([0-9])(\\.|)?([0-9]+)((,|\\.)[0-9]+)?\\.-", str => str.Replace(".-", "").Replace(".", "").Trim()}
+            {"([0-9])(\\.|)?([0-9]+)((,|\\.)[0-9]+)?\\.-", str => str.Replace(".-", "").Replace(".", "").Trim()},
+            {"[0-9]+\\svb", str => str.Replace(" vb", "").Trim() },
+            {"[0-9]+\\.[0-9]+,--", str => str.Replace(".", "").Replace(",--","") }
         };
 
         private WebpageDeserializer() { }
@@ -48,8 +50,10 @@ namespace CameraGearViewer.Classes
 
         public static GearComponent Deserialize(string address)
         {
-            var web = new HtmlWeb();
-            web.OverrideEncoding = CodePagesEncodingProvider.Instance.GetEncoding(1252);
+            var web = new HtmlWeb
+            {
+                OverrideEncoding = CodePagesEncodingProvider.Instance.GetEncoding(1252)
+            };
             var htmlDoc = web.Load(address);
             try
             {

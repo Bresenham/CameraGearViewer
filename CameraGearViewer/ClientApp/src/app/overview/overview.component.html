@@ -1,9 +1,10 @@
-<table class="table table-dark">
+<table class="table table-dark table-striped table-hover">
   <thead>
     <tr>
       <th *ngFor="let header of headerElements" [ngStyle]="{'cursor': header.style}" (click)="orderBy(header.event)">
-        <img src={{header.icon}} width="32" height="32"/>{{header.descriptor}}
+        <img src={{header.icon}} width="32" height="32" />{{header.descriptor}}
       </th>
+      <th><input class="form-control" type="text" placeholder="Suchen..." (input)="onSearchInputChange($event.target.value)"></th>
       <th style="cursor: pointer;"><img src="../../assets/imgs/refresh-48.png" width="32" height="32" (click)="loadGearComponents()"/></th>
     </tr>
   </thead>
@@ -13,6 +14,7 @@
       <td>{{gear.price}}€</td>
       <td><a href="{{gear.forumLink}}">Hier</a></td>
       <td>{{gear.date | date: "dd.MM.yyyy, HH:mm"}}</td>
+      <td></td>
       <td></td>
     </tr>
   </tbody>

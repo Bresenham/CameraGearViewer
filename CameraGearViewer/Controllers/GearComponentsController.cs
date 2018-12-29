@@ -32,12 +32,22 @@ namespace CameraGearViewer.Controllers
         [HttpGet("sorted")]
         public IEnumerable<GearComponent> GetGearComponentsSorted([FromQuery] string orderBy, [FromQuery] string direction)
         {
+            if (orderBy == null) return _context.GearComponents;
+
             PropertyInfo prop = typeof(GearComponent).GetProperty(orderBy);
 
             if (direction.Equals("asc"))
                 return _context.GearComponents.OrderBy(x => prop.GetValue(x, null));
             else
                 return _context.GearComponents.OrderByDescending(x => prop.GetValue(x, null));
+        }
+
+        // "/filterText=ABCD
+        [HttpGet("filtered")]
+        public IEnumerable<GearComponent> GetGearComponentsFiltered([FromQuery] string filterText)
+        {
+            var filter = filterText.ToLower();
+            return _context.GearComponents.Where(x => x.Name.ToLower().Contains(filter));
         }
 
         // GET: api/GearComponents/5

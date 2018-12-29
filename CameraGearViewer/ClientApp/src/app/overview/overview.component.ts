@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { GearComponent } from '../gear/gear.component';
 import { formatDate } from '@angular/common';
 import { GearService } from '../services/gear.service';
@@ -10,16 +10,14 @@ import { Observable } from 'rxjs';
 })
 export class OverviewComponent implements OnInit {
 
-  createdOn = formatDate(Date.now(), "dd.MM.yyyy HH:mm", "en-US");
-
   gearPieces: Observable<GearComponent[]>;
 
   headerElements = [
     {
       descriptor: "Name",
       icon: "/assets/imgs/name-32.png",
-      style: "default",
-      event: ""
+      style: "pointer",
+      event: "Name"
     },
     {
       descriptor: "Price",
@@ -29,7 +27,7 @@ export class OverviewComponent implements OnInit {
     },
     {
       descriptor: "Link",
-      icon: "/assets/imgs/timer-32.png",
+      icon: "/assets/imgs/link-32.png",
       style: "default",
       event: ""
     },
@@ -41,13 +39,28 @@ export class OverviewComponent implements OnInit {
     }
   ];
 
-  constructor(private gearService: GearService) {}
+  isSortedAsc = false;
+
+  constructor(private gearService: GearService, private element: ElementRef) {
+    window.addEventListener("keydown", function (e) {
+      /* Catch CTRL-F Shortcut */
+      if (e.keyCode === 114 || (e.ctrlKey && e.keyCode === 70)) {
+        element.nativeElement.querySelector(".form-control").focus();
+        event.preventDefault();
+      }
+    })
+  }
+
+  onSearchInputChange(searchInput: string) {
+    if (searchInput.length == 0)
+      this.loadGearComponents();
+    else
+      this.gearPieces = this.gearService.getGearComponentsFiltered(searchInput);
+  }
 
   loadGearComponents() {
     this.gearPieces = this.gearService.getGearComponents();
   }
-
-  isSortedAsc = false;
 
   orderBy(property : string) {
     this.isSortedAsc = !this.isSortedAsc;
